@@ -3,6 +3,11 @@
 Curso de Automação de Testes Utilizando  Java com Selenium Webdriver interagindo diversas telas.
 
 
+# [Escopo]:
+
+Navegação entre determinadas telas mapeadas no script, preenchimento de dados de forma automatizada e screenshot da evidência trazendo o resultado final exato dos dados preenchidos.
+
+
 # [Frameworks]:
 
 _Selenium
