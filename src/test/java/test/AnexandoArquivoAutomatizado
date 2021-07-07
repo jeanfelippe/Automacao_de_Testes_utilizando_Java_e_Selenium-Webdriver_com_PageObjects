@@ -1,0 +1,81 @@
+    package test;
+
+    import org.easetech.easytest.annotation.DataLoader;
+    import org.easetech.easytest.annotation.Param;
+    import org.easetech.easytest.runner.DataDrivenTestRunner;
+    import org.junit.After;
+    import org.junit.Before;
+    import org.junit.Rule;
+    import org.junit.Test;
+    import org.junit.rules.TestName;
+    import org.junit.runner.RunWith;
+    import org.openqa.selenium.By;
+    import org.openqa.selenium.WebDriver;
+    import org.openqa.selenium.WebElement;
+    import org.openqa.selenium.chrome.ChromeDriver;
+    import org.openqa.selenium.support.ui.Select;
+    import suport.Generator;
+    import suport.Screenshot;
+    import suport.Web;
+
+    import java.awt.*;
+    import java.awt.datatransfer.StringSelection;
+    import java.awt.event.KeyEvent;
+    import java.io.File;
+    import java.time.Clock;
+    import java.util.concurrent.TimeUnit;
+
+    import static org.junit.Assert.assertEquals;
+
+   
+
+    @RunWith(DataDrivenTestRunner.class)
+   
+    public class InformacoesUsuarioTestFast {
+    private WebDriver navegador;
+    File file = new File("C:\\Users\\Jean\\test.png");
+
+    @Rule
+    public TestName test= new TestName();
+    //instancia test criada para posteriormente utilizar getmethod name e pegar o nome da classe sem precisar referenciala
+
+    @Before
+    public void setUp(){
+        //abrindo o navegador
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Jean\\drivers\\chromedriver91\\chromedriver.exe");
+        navegador= new ChromeDriver();
+        navegador.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+     
+    }
+
+        @Test
+        public void testRapido() throws AWTException {
+            navegador.get("https://im.ge/upload");
+            //WebElement fileInput=navegador.findElement(By.xpath("//span[@class=\"icon fas fa-cloud-upload-alt cursor-pointer\"]");
+            navegador.findElement(By.xpath("//span[@class=\"icon fas fa-cloud-upload-alt cursor-pointer\"]")).click();
+            navegador.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+
+            StringSelection ss = new StringSelection(file.getAbsolutePath());
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+
+//imitate mouse events like ENTER, CTRL+C, CTRL+V
+
+            Robot robot = new Robot();
+            robot.delay(250);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.delay(50);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+
+            
+
+        }
+
+
+
+}
